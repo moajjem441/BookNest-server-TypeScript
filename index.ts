@@ -7,7 +7,7 @@ import { createRemoteJWKSet, jwtVerify } from "jose-cjs";
 
 dotenv.config();
 
-// Custom Request Interface (JWTPayload এর বদলে Record<string, any> ব্যবহার করা হয়েছে)
+// Custom Request Interface
 interface AuthenticatedRequest extends Request {
   user?: Record<string, any>;
 }
@@ -111,15 +111,13 @@ async function run() {
       res.send("booknest Server Running");
     });
 
-
     app.get("/books", async (req: Request, res: Response) => {
       const books = await booksCollection.find({}).toArray();
       res.json(books);
     });
 
-
     app.get("/books/:id", async (req: Request, res: Response) => {
-     const id = req.params.id as string;
+      const id = req.params.id as string;
       if (!ObjectId.isValid(id)) {
         return res.status(400).json({ message: "Invalid Book ID format" });
       }
@@ -268,7 +266,7 @@ async function run() {
 
     app.get("/dashboard/shared-books/:userId", async (req: Request, res: Response) => {
       try {
-        const { userId } = req.params as string;
+        const userId = req.params.userId as string;
 
         if (!userId) {
           return res.status(400).json({ message: "User ID is required" });
@@ -292,7 +290,7 @@ async function run() {
 
     app.get("/dashboard/borrowRequests/:email", async (req: Request, res: Response) => {
       try {
-        const { email } = req.params;
+        const email = req.params.email as string;
 
         if (!email) {
           return res.status(400).json({ message: "Email is required" });
@@ -352,7 +350,7 @@ async function run() {
 
     app.delete("/books/:id", async (req: Request, res: Response) => {
       try {
-       const id = req.params.id as string;
+        const id = req.params.id as string;
 
         if (!ObjectId.isValid(id)) {
           return res.status(400).json({ message: "Invalid book ID format" });
@@ -433,7 +431,7 @@ async function run() {
 
     app.delete("/borrow-requests/:id", async (req: Request, res: Response) => {
       try {
-       const id = req.params.id as string;
+        const id = req.params.id as string;
 
         if (!ObjectId.isValid(id)) {
           return res.status(400).json({ message: "Invalid request ID format." });
@@ -454,7 +452,7 @@ async function run() {
 
     app.get("/dashboard/books/borrowed/:email", async (req: Request, res: Response) => {
       try {
-        const { email } = req.params as string;
+        const email = req.params.email as string;
 
         const approvedRequests = await borrowRequestsCollection
           .find({

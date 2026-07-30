@@ -231,7 +231,7 @@ async function run() {
         });
         app.delete("/dashboard/borrowRequests/:id", async (req, res) => {
             try {
-                const { id } = req.params;
+                const id = req.params.id;
                 if (!borrowRequestsCollection) {
                     return res.status(500).json({ error: "Database collection is not initialized." });
                 }
@@ -368,7 +368,7 @@ async function run() {
         });
         app.patch("/dashboard/books/return/:id", async (req, res) => {
             try {
-                const { id } = req.params;
+                const id = req.params.id;
                 if (!ObjectId.isValid(id)) {
                     return res.status(400).json({ error: "Invalid book ID" });
                 }
