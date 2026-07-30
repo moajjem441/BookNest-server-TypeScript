@@ -352,7 +352,7 @@ async function run() {
 
     app.delete("/books/:id", async (req: Request, res: Response) => {
       try {
-        const id = req.params.id;
+       const id = req.params.id as string;
 
         if (!ObjectId.isValid(id)) {
           return res.status(400).json({ message: "Invalid book ID format" });
