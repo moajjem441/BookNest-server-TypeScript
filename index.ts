@@ -268,7 +268,7 @@ async function run() {
 
     app.get("/dashboard/shared-books/:userId", async (req: Request, res: Response) => {
       try {
-        const { userId } = req.params;
+        const { userId } = req.params as string;
 
         if (!userId) {
           return res.status(400).json({ message: "User ID is required" });
