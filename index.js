@@ -191,7 +191,7 @@ async function run() {
         });
         app.get("/dashboard/shared-books/:userId", async (req, res) => {
             try {
-                const { userId } = req.params;
+                const userId = req.params.userId;
                 if (!userId) {
                     return res.status(400).json({ message: "User ID is required" });
                 }
@@ -211,7 +211,7 @@ async function run() {
         });
         app.get("/dashboard/borrowRequests/:email", async (req, res) => {
             try {
-                const { email } = req.params;
+                const email = req.params.email;
                 if (!email) {
                     return res.status(400).json({ message: "Email is required" });
                 }
@@ -347,7 +347,7 @@ async function run() {
         });
         app.get("/dashboard/books/borrowed/:email", async (req, res) => {
             try {
-                const { email } = req.params;
+                const email = req.params.email;
                 const approvedRequests = await borrowRequestsCollection
                     .find({
                     borrowerEmail: email,
