@@ -454,7 +454,7 @@ async function run() {
 
     app.get("/dashboard/books/borrowed/:email", async (req: Request, res: Response) => {
       try {
-        const { email } = req.params as string;
+        const { email } = req.params ;
 
         const approvedRequests = await borrowRequestsCollection
           .find({
