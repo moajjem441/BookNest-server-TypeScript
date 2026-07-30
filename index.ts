@@ -116,10 +116,10 @@ async function run() {
       const books = await booksCollection.find({}).toArray();
       res.json(books);
     });
-    
+
 
     app.get("/books/:id", async (req: Request, res: Response) => {
-      const id = req.params.id;
+      const id = req.params.id as String;
       if (!ObjectId.isValid(id)) {
         return res.status(400).json({ message: "Invalid Book ID format" });
       }
