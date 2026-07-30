@@ -373,7 +373,7 @@ async function run() {
 
     app.patch("/borrow-requests/:id", async (req: Request, res: Response) => {
       try {
-        const id = req.params.id;
+        const id = req.params.id as string;
         console.log(req.body);
         const { status } = req.body;
 
