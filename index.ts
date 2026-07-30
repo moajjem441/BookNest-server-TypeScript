@@ -145,7 +145,7 @@ async function run() {
 
     app.post("/books/:id/request", verifyToken, async (req: AuthenticatedRequest, res: Response) => {
       try {
-        const id = req.params.id;
+        const id = req.params.id as string;
         const borrower = req.body;
         if (!ObjectId.isValid(id)) {
           return res.status(400).json({ message: "Invalid Book ID" });
