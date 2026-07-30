@@ -315,7 +315,7 @@ async function run() {
 
     app.delete("/dashboard/borrowRequests/:id", async (req: Request, res: Response) => {
       try {
-        const { id } = req.params;
+        const id = req.params.id as string;
 
         if (!borrowRequestsCollection) {
           return res.status(500).json({ error: "Database collection is not initialized." });
